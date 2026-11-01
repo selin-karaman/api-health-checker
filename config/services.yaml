@@ -1,0 +1,20 @@
+services:
+  - name: JSONPlaceholder
+    url: https://jsonplaceholder.typicode.com/posts/1
+    expected_status: 200
+    timeout: 3
+
+  - name: httpbin
+    url: https://httpbin.org/get
+    expected_status: 200
+    timeout: 3
+
+  - name: Wrong Status
+    url: https://httpbin.org/status/404
+    expected_status: 200
+    timeout: 3
+
+  - name: Invalid Host
+    url: https://this-domain-does-not-exist.invalid
+    expected_status: 200
+    timeout: 3
