@@ -30,6 +30,7 @@ def check_service(service: dict) -> dict:
     url = service["url"]
     expected_status = service["expected_status"]
     timeout = service["timeout"]
+    expected_content = service.get("contains")
 
     last_reason = None
 
@@ -48,6 +49,22 @@ def check_service(service: dict) -> dict:
             )
 
             if response.status_code == expected_status:
+                if (
+                    expected_content
+                    and expected_content not in response.text
+                ):
+                    return build_result(
+                        service=service,
+                        status="DOWN",
+                        http_status=response.status_code,
+                        response_time_ms=response_time_ms,
+                        reason=(
+                            "Expected response content not found: "
+                            f"'{expected_content}'"
+                        ),
+                        attempts=attempt,
+                    )
+
                 if response_time_ms > SLOW_RESPONSE_THRESHOLD_MS:
                     return build_result(
                         service=service,

@@ -18,3 +18,9 @@ services:
     url: https://this-domain-does-not-exist.invalid
     expected_status: 200
     timeout: 3
+
+  - name: Content Check
+    url: https://httpbin.org/json
+    expected_status: 200
+    contains: "slideshow"
+    timeout: 3

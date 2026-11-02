@@ -49,5 +49,6 @@ def load_config(file_path: str) -> list[dict]:
 
         service.setdefault("expected_status", 200)
         service.setdefault("timeout", 5)
+        service.setdefault("contains", None)
 
     return services

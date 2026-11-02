@@ -1,0 +1,55 @@
+{
+    "summary": {
+        "total": 5,
+        "up": 1,
+        "degraded": 2,
+        "down": 2
+    },
+    "services": [
+        {
+            "name": "JSONPlaceholder",
+            "url": "https://jsonplaceholder.typicode.com/posts/1",
+            "status": "UP",
+            "http_status": 200,
+            "response_time_ms": 289.45,
+            "reason": null,
+            "attempts": 1
+        },
+        {
+            "name": "httpbin",
+            "url": "https://httpbin.org/get",
+            "status": "DEGRADED",
+            "http_status": 200,
+            "response_time_ms": 547.71,
+            "reason": "Response time exceeded 500 ms",
+            "attempts": 1
+        },
+        {
+            "name": "Wrong Status",
+            "url": "https://httpbin.org/status/404",
+            "status": "DOWN",
+            "http_status": 404,
+            "response_time_ms": 523.43,
+            "reason": "Unexpected status code (expected 200, received 404)",
+            "attempts": 1
+        },
+        {
+            "name": "Invalid Host",
+            "url": "https://this-domain-does-not-exist.invalid",
+            "status": "DOWN",
+            "http_status": null,
+            "response_time_ms": null,
+            "reason": "Connection failed",
+            "attempts": 3
+        },
+        {
+            "name": "Content Check",
+            "url": "https://httpbin.org/json",
+            "status": "DEGRADED",
+            "http_status": 200,
+            "response_time_ms": 512.69,
+            "reason": "Response time exceeded 500 ms",
+            "attempts": 1
+        }
+    ]
+}
