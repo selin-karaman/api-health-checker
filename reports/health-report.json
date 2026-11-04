@@ -11,7 +11,7 @@
             "url": "https://jsonplaceholder.typicode.com/posts/1",
             "status": "UP",
             "http_status": 200,
-            "response_time_ms": 289.45,
+            "response_time_ms": 285.98,
             "reason": null,
             "attempts": 1
         },
@@ -20,7 +20,7 @@
             "url": "https://httpbin.org/get",
             "status": "DEGRADED",
             "http_status": 200,
-            "response_time_ms": 547.71,
+            "response_time_ms": 530.13,
             "reason": "Response time exceeded 500 ms",
             "attempts": 1
         },
@@ -29,7 +29,7 @@
             "url": "https://httpbin.org/status/404",
             "status": "DOWN",
             "http_status": 404,
-            "response_time_ms": 523.43,
+            "response_time_ms": 502.74,
             "reason": "Unexpected status code (expected 200, received 404)",
             "attempts": 1
         },
@@ -47,7 +47,7 @@
             "url": "https://httpbin.org/json",
             "status": "DEGRADED",
             "http_status": 200,
-            "response_time_ms": 512.69,
+            "response_time_ms": 605.12,
             "reason": "Response time exceeded 500 ms",
             "attempts": 1
         }

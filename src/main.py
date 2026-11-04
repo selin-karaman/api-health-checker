@@ -32,7 +32,7 @@ def main():
         services = load_config(args.config)
     except (FileNotFoundError, ValueError) as error:
         print(f"Error: {error}")
-        return
+        return 2
 
     print(f"Checking {len(services)} services...\n")
 
@@ -57,6 +57,11 @@ def main():
 
     print(f"\nReport saved: {report_path}")
 
+    if summary["up"] == summary["total"]:
+        return 0
+
+    return 1
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
