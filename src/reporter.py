@@ -45,6 +45,16 @@ def generate_summary(results: list[dict]) -> dict:
     }
 
 
+def get_overall_status(summary: dict) -> str:
+    if summary["down"] > 0:
+        return "DOWN"
+
+    if summary["degraded"] > 0:
+        return "DEGRADED"
+
+    return "UP"
+
+
 def format_summary(summary: dict) -> str:
     return "\n".join(
         [
@@ -60,6 +70,8 @@ def format_summary(summary: dict) -> str:
 def save_json_report(
     results: list[dict],
     summary: dict,
+    timestamp: str,
+    duration_seconds: float,
     output_directory: str = "reports",
 ) -> str:
     output_path = Path(output_directory)
@@ -71,6 +83,9 @@ def save_json_report(
     report_path = output_path / "health-report.json"
 
     report = {
+        "timestamp": timestamp,
+        "duration_seconds": duration_seconds,
+        "overall_status": get_overall_status(summary),
         "summary": summary,
         "services": results,
     }

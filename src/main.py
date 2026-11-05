@@ -1,4 +1,6 @@
 import argparse
+from datetime import datetime, timezone
+from time import perf_counter
 
 from src.checker import check_service
 from src.config_loader import load_config
@@ -28,6 +30,9 @@ def main():
 
     args = parser.parse_args()
 
+    timestamp = datetime.now(timezone.utc).isoformat()
+    start_time = perf_counter()
+
     try:
         services = load_config(args.config)
     except (FileNotFoundError, ValueError) as error:
@@ -49,9 +54,16 @@ def main():
 
     print(format_summary(summary))
 
+    duration_seconds = round(
+        perf_counter() - start_time,
+        3,
+    )
+
     report_path = save_json_report(
         results,
         summary,
+        timestamp=timestamp,
+        duration_seconds=duration_seconds,
         output_directory=args.output,
     )
 

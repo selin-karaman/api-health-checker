@@ -1,4 +1,5 @@
 import sys
+from datetime import datetime, timedelta
 
 import pytest
 
@@ -56,10 +57,19 @@ def setup_mock_dependencies(monkeypatch, status="UP"):
         ),
     )
 
-    def mock_save_json_report(results, summary, output_directory):
+    def mock_save_json_report(
+        results,
+        summary,
+        timestamp,
+        duration_seconds,
+        output_directory,
+    ):
         saved_data["results"] = results
         saved_data["summary"] = summary
+        saved_data["timestamp"] = timestamp
+        saved_data["duration_seconds"] = duration_seconds
         saved_data["output_directory"] = output_directory
+
         return f"{output_directory}/health-report.json"
 
     monkeypatch.setattr(
@@ -178,3 +188,35 @@ def test_main_displays_help(monkeypatch, capsys):
     assert exception.value.code == 0
     assert "Check the health of API endpoints" in output
     assert "--output" in output
+
+
+def test_main_generates_utc_timestamp(monkeypatch):
+    saved_data = setup_mock_dependencies(monkeypatch)
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["main.py", "config/services.yaml"],
+    )
+
+    main_module.main()
+
+    timestamp = datetime.fromisoformat(saved_data["timestamp"])
+
+    assert timestamp.tzinfo is not None
+    assert timestamp.utcoffset() == timedelta(0)
+
+
+def test_main_records_duration(monkeypatch):
+    saved_data = setup_mock_dependencies(monkeypatch)
+
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["main.py", "config/services.yaml"],
+    )
+
+    main_module.main()
+
+    assert isinstance(saved_data["duration_seconds"], float)
+    assert saved_data["duration_seconds"] >= 0

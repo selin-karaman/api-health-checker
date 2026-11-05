@@ -1,8 +1,11 @@
 {
+    "timestamp": "2026-11-05T07:18:24.941955+00:00",
+    "duration_seconds": 1.792,
+    "overall_status": "DOWN",
     "summary": {
         "total": 5,
-        "up": 1,
-        "degraded": 2,
+        "up": 3,
+        "degraded": 0,
         "down": 2
     },
     "services": [
@@ -11,17 +14,17 @@
             "url": "https://jsonplaceholder.typicode.com/posts/1",
             "status": "UP",
             "http_status": 200,
-            "response_time_ms": 285.98,
+            "response_time_ms": 304.61,
             "reason": null,
             "attempts": 1
         },
         {
             "name": "httpbin",
             "url": "https://httpbin.org/get",
-            "status": "DEGRADED",
+            "status": "UP",
             "http_status": 200,
-            "response_time_ms": 530.13,
-            "reason": "Response time exceeded 500 ms",
+            "response_time_ms": 451.92,
+            "reason": null,
             "attempts": 1
         },
         {
@@ -29,7 +32,7 @@
             "url": "https://httpbin.org/status/404",
             "status": "DOWN",
             "http_status": 404,
-            "response_time_ms": 502.74,
+            "response_time_ms": 496.75,
             "reason": "Unexpected status code (expected 200, received 404)",
             "attempts": 1
         },
@@ -45,10 +48,10 @@
         {
             "name": "Content Check",
             "url": "https://httpbin.org/json",
-            "status": "DEGRADED",
+            "status": "UP",
             "http_status": 200,
-            "response_time_ms": 605.12,
-            "reason": "Response time exceeded 500 ms",
+            "response_time_ms": 496.01,
+            "reason": null,
             "attempts": 1
         }
     ]
